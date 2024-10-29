@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Lab 4B - Step 2</title>
+		<script crossorigin src="https://unpkg.com/react@^18/umd/react.development.js"></script>
+		<script crossorigin src="https://unpkg.com/react-dom@^18/umd/react-dom.development.js"></script>
+		<script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	</head>
+	<body>
+	<div id="root"></div>
+		<script type="text/babel">
+		
+			//THIS APPLICATION IS MISSING SOME KEY PIECES IN ORDER TO MAKE IT WORK.
+			//ADD IN THE MISSING PIECES USING YOUR NEWLY ACQUIRED REACT KNOWLEDGE.
+			//REFERENCE THE CODECADEMY EXAMPLES YOU COMPLETED FOR REFERENCE.
+			
+			//NOTE: YOU DO NOT NEED TO CHANGE ANY CODE IN THIS APPLICATION TO MAKE IT WORK
+			//EXCEPT FOR REASSIGNING THE colorHex VARIABLE AND backgroundColor VALUES.
+			//ALL OTHER CODE SHOULD BE NEW CODE THAT YOU ADD.
+			
+			const { useState } = React;
+			
+			//ColorDisplay Component
+			const ColorDisplay = props => {
+			
+				//declare our state with useState hooks
+				const [red, setRed] = useState(0);
+				const [green, setGreen] = useState(0);
+				const [blue, setBlue] = useState(0);
+				
+				const changeColor = (value, color) => {
+					//ADD MISSING CODE HERE
+				}	
+				
+				const styles = {
+					width: 500, 
+					height: 200, 
+					backgroundColor: `rgb(0,0,0)`, //UPDATE THIS LINE TO DYNAMICALLY CHANGE COLOR
+					fontFamily: 'Arial',
+					padding: 15,
+					color: '#B0B0B0',
+				}
+				
+				return (
+					<div style={styles}>
+						<h1>Color Display</h1>
+						<ColorPicker changeColor={changeColor} currentColors={{red, green, blue}} />
+						<HexDisplay currentColors={{red, green, blue}} />
+					</div>
+				)			
+			
+			}
+			
+			
+			//ColorPicker Component
+			const ColorPicker = props => {
+			
+				const updateColor = (e, color) => {
+					//ADD MISSING CODE HERE
+				}
+				
+				const optionList = [...Array(256)].map((e, i) => {
+					return <option key={i} value={i}>{i}</option>
+				})
+				
+				const spanStyle = {
+					paddingLeft: 10,
+					paddingRight: 5,
+					paddingBottom: 20
+				}
+				
+				return (
+					<div>
+						<span style={spanStyle}>Red:</span>
+						<select id="foo" name="foo" onChange={(e) => updateColor(e, 'red')} value={props.currentColors.red}>
+							{optionList}
+						</select>
+						<span style={spanStyle}>Green:</span>
+						<select id="bar" name="bar" onChange={(e) => updateColor(e, 'green')} value={props.currentColors.green}>
+							{optionList}
+						</select>
+						<span style={spanStyle}>Blue:</span>
+						<select id="abc" name="abc" onChange={(e) => updateColor(e, 'blue')} value={props.currentColors.blue}>
+							{optionList}
+						</select>
+					</div>
+				)
+			}
+			
+			
+			//HexDisplay Component
+			const HexDisplay = props => {
+			
+				const rgbToHex = rgb => {
+					let hex = Number(rgb).toString(16);
+					if (hex.length < 2) {
+						hex = "0" + hex;
+					}
+					return hex;
+				}
+				
+				const spanStyle = {
+					paddingLeft: 10,
+					paddingRight: 5,
+					color: '#B0B0B0'
+				}
+				
+				const colorHex = `#000000` //CHANGE VALUE ASSIGNMENT HERE TO DYNAMICALLY SET colorHex
+				
+				return (
+					<div>
+						<span style={spanStyle}>{colorHex}</span>
+					</div>
+				)			
+			}
+			
+			
+			//Add Component to Root
+			const root = ReactDOM.createRoot(document.getElementById('root'));
+			root.render(<ColorDisplay />)
+		</script>
+	</body>
+</html>
